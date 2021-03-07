@@ -1,0 +1,11 @@
+.loginbox {
+    margin: auto 3rem;
+    padding: 10rem 0rem;
+}
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}

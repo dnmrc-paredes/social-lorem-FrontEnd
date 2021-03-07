@@ -1,0 +1,10 @@
+.loginregister {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.loginregister a {
+    margin: 0rem 1rem;
+    color: white;
+    text-decoration: none;
+}
