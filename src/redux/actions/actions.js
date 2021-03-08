@@ -36,3 +36,15 @@ export const loggedIn = () => {
     }
 }
 
+export const sideBarToggle = () => {
+    return {
+        type: 'SIDEBAR_TOGGLE'
+    }
+}
+
+export const getAllData = (data) => {
+    return {
+        type: 'GET_ALL_DATA',
+        payload: data
+    }
+}

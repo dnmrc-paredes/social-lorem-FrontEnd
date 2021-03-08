@@ -66,6 +66,7 @@ const SignUpPage = () => {
                 {errors.errors.length > 0 ? <div>
                     <Collapse in={open}>
                       <Alert style={{marginBottom: "1rem"}} variant="filled" severity="error" onClose={() => {
+                          dispatch(errorCleanUp())
                           setOpen(false)
                       }}> {errors.errors.map(err => {
                           return <p key={err}> {err} </p>

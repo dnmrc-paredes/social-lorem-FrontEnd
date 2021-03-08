@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 
 import {TextField, Button, Collapse} from '@material-ui/core'
 import { Alert } from '@material-ui/lab';
@@ -14,6 +15,7 @@ import './login-styles.css'
 const LoginPage = () => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
     const errors = useSelector(state => state.errors)
 
     const [open, setOpen] = useState(true)
@@ -40,13 +42,13 @@ const LoginPage = () => {
             const info = await axios.post('http://localhost:8000/login', login)
 
             dispatch(errorCleanUp())
-            dispatch(successLogin(info.data))
             setLogin({
                 email: "",
                 password: ""
             })
             dispatch(loggedIn())
-            
+            dispatch(successLogin(info.data))
+            history.push("/home")
         } catch (err) {
             setOpen(true)
             dispatch(errorEncounter(err.response.data.msg))
@@ -60,6 +62,7 @@ const LoginPage = () => {
             {errors.errors.length > 0 ? <div>
                     <Collapse in={open}>
                       <Alert style={{marginBottom: "1rem"}} variant="filled" severity="error" onClose={() => {
+                          dispatch(errorCleanUp())
                           setOpen(false)
                       }}> {errors.errors.map(err => {
                           return <p key={err}> {err} </p>
