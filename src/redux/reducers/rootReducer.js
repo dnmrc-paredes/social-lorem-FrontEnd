@@ -9,6 +9,7 @@ import loggedInReducer from './loggedInReducer'
 import sideBarReducer from './sideBarReducer'
 import postDataReducer from './postDataReducer'
 import usersPostsReducer from './usersPostReducer'
+import likedByReducer from './likedByReducer'
 
 const persistConfig = {
     key: 'root',
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     isLoggedIn: loggedInReducer,
     errors: errorsReducer,
     datas: postDataReducer,
-    myPost: usersPostsReducer
+    myPost: usersPostsReducer,
+    likedBy: likedByReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

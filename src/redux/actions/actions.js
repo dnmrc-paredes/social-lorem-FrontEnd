@@ -55,3 +55,10 @@ export const getAllMyPost = (data) => {
         payload: data
     }
 }
+
+export const getLikes = (data) => {
+    return {
+        type: 'GET_LIKED_BY',
+        payload: data
+    }
+}

@@ -15,6 +15,7 @@ import SignUpPage from './pages/signup/signup'
 import HomePage from './pages/home/home'
 import CreatePostPage from './pages/createPost/createPost'
 import MyPostsPage from './pages/myPosts/myPosts'
+import LikedByPage from './pages/likedBy/likedBy'
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/home" render={() => user.user.user ? <HomePage/> : <Redirect to="/" /> } />
             <Route path="/createpost" render={() => user.user.user ? <CreatePostPage/> : <Redirect to="/" /> } />
             <Route path="/myposts" render={() => user.user.user ? <MyPostsPage/> : <Redirect to="/" /> } />
+            <Route path="/likedby/:postID" render={() => user.user.user ? <LikedByPage/> : <Redirect to="/" /> } />
           </Switch>
         <Footer/>  
       </BrowserRouter>

@@ -1,0 +1,16 @@
+.likebox {
+    min-height: 85vh;
+    padding: 5rem 2rem 0rem 2rem;
+}
+
+
+.likeitems {
+    padding: 1rem 0.5rem;
+    margin: 0.3rem 4rem;
+    background-color: #EEEE;
+    border-radius: 5px;
+}
+
+.likeitems h1 {
+    margin-left: 1rem;
+}

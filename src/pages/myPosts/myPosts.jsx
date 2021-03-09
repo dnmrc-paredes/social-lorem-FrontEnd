@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 import {Button} from '@material-ui/core'
@@ -11,6 +12,8 @@ import {getAllMyPost, getAllData} from '../../redux/actions/actions'
 import './myPost-styles.css'
 
 const MyPostsPage = () => {
+
+    const history = useHistory()
 
     const dispatch = useDispatch()
 
@@ -40,8 +43,8 @@ const MyPostsPage = () => {
     // eslint-disable-next-line
     }, [datas])
 
-    const deletePost = async (id) => {
-        await axios.delete(`http://localhost:8000/deleteonepost/${id}`)
+    const deletePost = async (postID) => {
+        await axios.delete(`http://localhost:8000/deleteonepost/${postID}`)
     }
 
     return <div className="mypostbox">
@@ -49,6 +52,9 @@ const MyPostsPage = () => {
             return <div key={post._id} className="mypostitem">
 
                 <div className="mypost1">
+                    <Button variant="contained" color="primary" style={{margin: '0rem 0.5rem'}} onClick={() => {
+                        history.push(`/likedby/${post._id}`)
+                    }}> Liked By </Button>
                     <Button variant="contained" color="primary" onClick={() => {
                         deletePost(post._id)
                     }}>
@@ -57,7 +63,7 @@ const MyPostsPage = () => {
                 </div>
 
                 <div className="mypost2">
-                    <p> {post.content} </p>
+                    <h3> {post.content} </h3>
                 </div>
 
             </div>
