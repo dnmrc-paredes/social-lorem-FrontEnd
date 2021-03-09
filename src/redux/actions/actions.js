@@ -48,3 +48,10 @@ export const getAllData = (data) => {
         payload: data
     }
 }
+
+export const getAllMyPost = (data) => {
+    return {
+        type: 'GET_ALL_MY_POST',
+        payload: data
+    }
+}

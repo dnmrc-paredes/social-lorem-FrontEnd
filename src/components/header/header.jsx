@@ -148,7 +148,14 @@ const Header = () => {
                 <ListItemText primary="Edit Profile"/> 
             </ListItem>
             <ListItem button >
-                <ListItemText primary="Post"/> 
+                <ListItemText primary="Post" onClick={() => {
+                  history.push("/createpost")
+                }} /> 
+            </ListItem>
+            <ListItem button >
+                <ListItemText primary="My Posts" onClick={() => {
+                  history.push("/myposts")
+                }} /> 
             </ListItem>
             <Divider />
             <ListItem button onClick={() => {

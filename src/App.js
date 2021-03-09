@@ -13,6 +13,8 @@ import Footer from './components/footer/footer'
 import LoginPage from './pages/root/login'
 import SignUpPage from './pages/signup/signup'
 import HomePage from './pages/home/home'
+import CreatePostPage from './pages/createPost/createPost'
+import MyPostsPage from './pages/myPosts/myPosts'
 
 const App = () => {
 
@@ -26,6 +28,8 @@ const App = () => {
             <Route exact path="/" render={() => !user.user.user ? <LoginPage/> : <Redirect to="/home" /> } />
             <Route path="/signup" render={() => user.user.user ? <Redirect to="/home" /> : <SignUpPage/> } />
             <Route path="/home" render={() => user.user.user ? <HomePage/> : <Redirect to="/" /> } />
+            <Route path="/createpost" render={() => user.user.user ? <CreatePostPage/> : <Redirect to="/" /> } />
+            <Route path="/myposts" render={() => user.user.user ? <MyPostsPage/> : <Redirect to="/" /> } />
           </Switch>
         <Footer/>  
       </BrowserRouter>

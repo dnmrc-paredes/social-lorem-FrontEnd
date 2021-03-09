@@ -37,6 +37,8 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        console.log(`Bano`)
+
         try {
 
             const info = await axios.post('http://localhost:8000/login', login)
