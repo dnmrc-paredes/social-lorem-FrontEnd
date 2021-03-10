@@ -9,3 +9,20 @@
     width: 50%;
     margin: auto;
 }
+
+@media screen and (max-width: 750px) {
+
+    .signupbox {
+        margin: 1rem;
+    }
+
+    .signupform {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .signupform {
+        width: 100%;
+    }
+}

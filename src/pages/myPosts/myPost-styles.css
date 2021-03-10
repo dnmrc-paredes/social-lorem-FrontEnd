@@ -8,9 +8,8 @@
     flex-direction: column;
     padding: 1rem 1rem 5rem 1rem;
     margin: 1rem 6rem;
-    background-color: #EEEE;
+    background-color: #eceff1;
     border-radius: 5px;
-    box-shadow: 0 8px 6px -6px black;
 }
 
 .mypost1 {
@@ -21,5 +20,18 @@
 }
 
 .mypost2 {
+    padding-top: 1rem;
     flex: 1;
+}
+
+@media screen and (max-width: 850px) {
+    .mypostitem {
+        margin: 1rem 2rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .mypostitem {
+        margin: 1rem;
+    }
 }

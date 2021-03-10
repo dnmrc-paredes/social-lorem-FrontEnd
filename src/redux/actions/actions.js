@@ -62,3 +62,10 @@ export const getLikes = (data) => {
         payload: data
     }
 }
+
+export const getUser = (data) => {
+    return {
+        type: 'GET_CURRENT_USER',
+        payload: data
+    }
+}

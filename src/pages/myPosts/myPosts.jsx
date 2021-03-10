@@ -24,7 +24,7 @@ const MyPostsPage = () => {
 
     useEffect(() => {
         const getMyPosts =  async () => {
-            const info = await axios.get(`http://localhost:8000/myposts/${userID}`)
+            const info = await axios.get(`https://social-lorem-api.herokuapp.com/myposts/${userID}`)
             dispatch(getAllMyPost(info.data))
         }
         getMyPosts()
@@ -34,7 +34,7 @@ const MyPostsPage = () => {
     useEffect(() => {
         
         const getAllPost = async () => {
-            const info = await axios.get('http://localhost:8000/getallpost')
+            const info = await axios.get('https://social-lorem-api.herokuapp.com/getallpost')
             dispatch(getAllData(info.data.data))
         }
 
@@ -44,11 +44,12 @@ const MyPostsPage = () => {
     }, [datas])
 
     const deletePost = async (postID) => {
-        await axios.delete(`http://localhost:8000/deleteonepost/${postID}`)
+        await axios.delete(`https://social-lorem-api.herokuapp.com/deleteonepost/${postID}`)
     }
 
     return <div className="mypostbox">
-        {myPostsData.data.data.posts.map(post => {
+
+        {myPostsData.data.data.posts.length > 0 ? myPostsData.data.data.posts.map(post => {
             return <div key={post._id} className="mypostitem">
 
                 <div className="mypost1">
@@ -67,7 +68,7 @@ const MyPostsPage = () => {
                 </div>
 
             </div>
-        })}
+        }) : <h1 style={{textAlign: 'center', paddingTop: '5rem'}}> Create a post now. </h1> }
     </div>
 }
 

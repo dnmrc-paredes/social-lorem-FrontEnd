@@ -8,3 +8,18 @@
     color: white;
     text-decoration: none;
 }
+
+.mediaqlinks {
+    display: none;
+}
+
+@media screen and (max-width: 750px) {
+    .loginregister {
+        display: none;
+    }
+
+    .mediaqlinks {
+        display: initial;
+    }
+
+}

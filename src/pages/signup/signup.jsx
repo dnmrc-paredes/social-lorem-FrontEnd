@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 import {TextField, Button, Collapse} from '@material-ui/core'
 import { Alert } from '@material-ui/lab';
@@ -15,6 +16,7 @@ const SignUpPage = () => {
 
     const dispatch = useDispatch()
 
+    const history = useHistory()
     const errors = useSelector(state => state.errors)
 
     const [open, setOpen] = useState(true)
@@ -41,7 +43,7 @@ const SignUpPage = () => {
         
         try {
             
-            const info = await axios.post(`http://localhost:8000/signup`, signUp)
+            const info = await axios.post(`https://social-lorem-api.herokuapp.com/signup`, signUp)
             // console.log(info.data)
             dispatch(errorCleanUp())
             setSignUp({
@@ -73,6 +75,8 @@ const SignUpPage = () => {
                       })} </Alert>
                     </Collapse>
                     </div> : ""}
+
+                <h1> Sign Up </h1>    
                 <TextField required name="firstName" type="text" style={{marginBottom: "0.5rem"}} label="First Name" value={signUp.firstName} onChange={handleChange} />
                 <TextField required name="lastName" type="text" style={{marginBottom: "0.5rem"}} label="Last Name" value={signUp.lastName} onChange={handleChange} />
                 <TextField required name="email" type="email" style={{marginBottom: "0.5rem"}} label="Email" value={signUp.email} onChange={handleChange} />
@@ -80,6 +84,9 @@ const SignUpPage = () => {
                 <TextField required name="passwordConfirm" type="password" style={{marginBottom: "0.5rem"}} label="Password Confirm" value={signUp.passwordConfirm} onChange={handleChange} />
 
                 <Button variant="contained" color="primary" style={{marginTop: "2rem"}} onClick={handleSubmit} > Sign Up </Button>
+                <Button variant="contained" color="secondary" style={{marginTop: "0.3rem"}} onClick={() => {
+                    history.push(`/`)
+                }} > Login </Button>
             </form>
         </div>
     )

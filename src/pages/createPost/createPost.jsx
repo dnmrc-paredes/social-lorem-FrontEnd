@@ -26,7 +26,7 @@ const CreatePostPage = () => {
     useEffect(() => {
         
         const getAllPost = async () => {
-            const info = await axios.get('http://localhost:8000/getallpost')
+            const info = await axios.get('https://social-lorem-api.herokuapp.com/getallpost')
             dispatch(getAllData(info.data.data))
         }
 
@@ -46,7 +46,7 @@ const CreatePostPage = () => {
 
         try {
 
-            await axios.post(`http://localhost:8000/createpost`, {content: post.content, userID: user.user.user._id})
+            await axios.post(`https://social-lorem-api.herokuapp.com/createpost`, {content: post.content, userID: user.user.user._id})
             dispatch(errorCleanUp())
             setPost({
                 content: ""
@@ -54,7 +54,6 @@ const CreatePostPage = () => {
         } catch (err) {
             setOpen(true)
             dispatch(errorEncounter(err.response.data.msg))
-            console.log(err.response.data.msg)
         }
 
     }

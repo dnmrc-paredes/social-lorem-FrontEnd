@@ -1,0 +1,16 @@
+.aboutbox {
+    min-height: 80vh;
+    /* margin: auto;
+    padding: 5rem 2rem; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.aboutinfo {
+    margin: auto 2rem;
+}
+
+.aboutinfo h1 {
+    margin-bottom: 1rem;
+}

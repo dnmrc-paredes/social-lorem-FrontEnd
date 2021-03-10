@@ -8,11 +8,10 @@
 .post {
     display: flex;
     flex-direction: column;
-    background-color: #EEEE;
+    background-color: #eceff1;
     border-radius: 5px;
-    box-shadow: 0 8px 6px -6px black;
-    height: 10rem;
-    padding: 1rem 2rem;
+    min-height: 100%;
+    padding: 1rem 0rem;
     margin: 1rem 15rem;
 }
 
@@ -31,5 +30,30 @@
 }
 
 .postreacts {
-    margin-top: 3rem;
+    margin: 3rem 0rem 0rem 2rem;
+}
+
+.reactbtn {
+    display: flex;
+    margin: auto;
+    align-items: center;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .post {
+        margin: 1rem 8rem;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .post {
+        margin: 1rem 2rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .post {
+        margin: 0.5rem 1rem;
+    }
 }

@@ -39,7 +39,7 @@ const LoginPage = () => {
 
         try {
 
-            const info = await axios.post('http://localhost:8000/login', login)
+            const info = await axios.post('https://social-lorem-api.herokuapp.com/login', login)
 
             dispatch(errorCleanUp())
             setLogin({
@@ -69,10 +69,15 @@ const LoginPage = () => {
                       })} </Alert>
                     </Collapse>
                     </div> : ""}
+
+                <h1> Login </h1>   
                 <TextField name="email" style={{marginBottom: "0.5rem"}} label="Email" type="email" onChange={handleChange} value={login.email} />
                 <TextField name="password" style={{marginBottom: "0.5rem"}} label="Password" type="password" onChange={handleChange} value={login.password} />
 
                 <Button variant="contained" style={{marginTop: "2rem"}} color="primary" onClick={handleSubmit} > Login </Button> 
+                <Button variant="contained" style={{marginTop: "0.3rem"}} color="secondary" onClick={() => {
+                    history.push(`/signup`)
+                }} > Register </Button> 
             </form>
         </div>
     )

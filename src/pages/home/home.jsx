@@ -1,6 +1,9 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import ShowMoreText from 'react-show-more-text'
+
 import axios from 'axios'
+
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
@@ -33,7 +36,7 @@ const HomePage = () => {
     useEffect(() => {
         
         const getAllPost = async () => {
-            const info = await axios.get('http://localhost:8000/getallpost')
+            const info = await axios.get('https://social-lorem-api.herokuapp.com/getallpost')
             dispatch(getAllData(info.data.data))
         }
 
@@ -44,12 +47,16 @@ const HomePage = () => {
 
     useEffect(() => {
         const getMyPosts =  async () => {
-            const info = await axios.get(`http://localhost:8000/myposts/${userID}`)
+            const info = await axios.get(`https://social-lorem-api.herokuapp.com/myposts/${userID}`)
             dispatch(getAllMyPost(info.data))
         }
         getMyPosts()
     // eslint-disable-next-line
     },[myPostsData])
+
+    const executeOnClick = (isExpanded) => {
+        console.log(`Expanded`)
+    }
 
     return (
         <div className="postbox">
@@ -61,19 +68,35 @@ const HomePage = () => {
 
                             <div className="postdetail">
                             <h3> {user.user.user ? data.postBy.firstName : ""} {user.user.user ? data.postBy.lastName : ""} </h3>
-                            <p> {data.content} </p>
+                            {/* {data.content.length > 30 ? <p> {data.content.substring(0,200)}<Link to="/viewpost"style={{textDecoration: 'none'}} > ...Read More. </Link> </p> : <p> {data.content} </p> }  */}
+                            {/* {data.content.length > 30 ? <p> {data.content.substring(0,200)}<span style={{color: 'blue', cursor: 'pointer'}} onClick={() => {
+                                return <p> {data.content} </p>
+                            }} >...Read More.</span> </p> : <p> {data.content} </p> }  */}
+                            <ShowMoreText lines={2}
+                                more='Show more'
+                                less='Show less'
+                                onClick={executeOnClick}
+                                expanded={false}
+                                width={700}> 
+
+                                {data.content}
+
+                            </ShowMoreText>
 
                         </div>
                         </div>
 
                         <div className="postreacts" style={{cursor: "pointer"}} onClick={async () => {
                             try {
-                                await axios.post(`http://localhost:8000/reacts/${data._id}`, {userID: user.user.user._id})
+                                await axios.post(`https://social-lorem-api.herokuapp.com/reacts/${data._id}`, {userID: user.user.user._id})
                             } catch (err) {
                                 console.log(err)
                             }
                         }}>
-                            <p> { <FavoriteIcon/> } {data.likes.length} </p>
+                            <div className="reactbtn">
+                            <FavoriteIcon/> 
+                            <p> {data.likes.length} </p>
+                            </div>
                         </div>
                     </div>
                 </div>

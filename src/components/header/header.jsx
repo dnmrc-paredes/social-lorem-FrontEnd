@@ -1,5 +1,6 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import {Link, useHistory} from 'react-router-dom'
 
 import {AppBar, Toolbar, Typography, Drawer, Divider, List} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,8 +11,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-
-import {Link, useHistory} from 'react-router-dom'
+// http://localhost:8000/getcurrentuser
 
 // Redux
 import {logoutUser} from '../../redux/actions/actions'
@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
 
+
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -87,7 +88,17 @@ const Header = () => {
 
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false)
+
+    // useEffect(() => {
+    //   const currentUser = async () => {
+    //     const info = await axios.get(`http://localhost:8000/getcurrentuser`, {userId: user.user.user._id})
+    //     console.log(info)
+    //     dispatch(getUser(info.data))
+    //   }
+
+    //   currentUser()
+    // })
 
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -117,6 +128,7 @@ const Header = () => {
 
                     {user.user.user ? <div className="loginregister">
                         <Link to="/home"> Home </Link>
+                        <Link to="/about"> About </Link>
                         <Link to="#" onClick={handleLogout} > Logout </Link>
                     </div> : <div className="loginregister">
                         <Link to="/"> Login </Link>
@@ -145,7 +157,9 @@ const Header = () => {
         <Divider />
         <List>
             <ListItem button >
-                <ListItemText primary="Edit Profile"/> 
+                <ListItemText primary="Home" className="mediaqlinks" onClick={() => {
+                  history.push("/home")
+                }} /> 
             </ListItem>
             <ListItem button >
                 <ListItemText primary="Post" onClick={() => {
@@ -157,12 +171,17 @@ const Header = () => {
                   history.push("/myposts")
                 }} /> 
             </ListItem>
+            <ListItem button >
+                <ListItemText primary="About" className="mediaqlinks" onClick={() => {
+                  history.push("/about")
+                }} /> 
+            </ListItem>
             <Divider />
             <ListItem button onClick={() => {
                 handleDrawerClose()
                 handleLogout()
             }}>
-                <ListItemText primary="Logout"/> 
+                <ListItemText className="mediaqlinks" primary="Logout"/> 
             </ListItem>
         </List>
       </Drawer>
