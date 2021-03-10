@@ -14,3 +14,25 @@
 .likeitems h1 {
     margin-left: 1rem;
 }
+
+@media screen and (max-width: 800px) {
+
+    .likebox {
+        padding: 5rem 2rem 0rem 2rem;
+    }
+
+    .likeitems {
+        margin: 0.3rem 0rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .likebox {
+        padding: 5rem 0.5rem 0rem 0.5rem;
+    }
+
+    .likeitems {
+        margin: 0.3rem 0rem;
+    }
+}

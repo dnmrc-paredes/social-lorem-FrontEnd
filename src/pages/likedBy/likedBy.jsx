@@ -23,7 +23,8 @@ const LikedByPage = () => {
             dispatch(getLikes(info))
         }
         getLikedBy()
-    })
+    // eslint-disable-next-line
+    }, [likedPost])
 
     return <div className="likebox">
         {likedPost.data.data.data.likes.length > 0 ? likedPost.data.data.data.likes.map(item => {
