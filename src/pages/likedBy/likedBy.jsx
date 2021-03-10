@@ -23,7 +23,7 @@ const LikedByPage = () => {
             dispatch(getLikes(info))
         }
         getLikedBy()
-    }, [likedPost])
+    })
 
     return <div className="likebox">
         {likedPost.data.data.data.likes.length > 0 ? likedPost.data.data.data.likes.map(item => {
