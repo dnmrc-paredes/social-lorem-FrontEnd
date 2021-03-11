@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {useHistory, useRouteMatch, Link} from 'react-router-dom'
+import {useRouteMatch, Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {Button} from '@material-ui/core'
@@ -12,7 +12,7 @@ import {getAllMyPost, getAllData} from '../../redux/actions/actions'
 import './myPost-styles.css'
 
 const MyPostsPage = () => {
-    
+
     const dispatch = useDispatch()
 
     const user = useSelector(state => state.user)
