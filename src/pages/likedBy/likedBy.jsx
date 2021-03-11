@@ -20,14 +20,14 @@ const LikedByPage = () => {
     useEffect(() => {
         const getLikedBy = async () => {
             const info = await axios.get(`https://social-lorem-api.herokuapp.com/likedby/${postID}`)
-            dispatch(getLikes(info))
+            dispatch(getLikes(info.data.data.likes))
         }
         getLikedBy()
-    // eslint-disable-next-line
-    }, [likedPost])
+    
+    }, [dispatch, postID])
 
     return <div className="likebox">
-        {likedPost.data.data.data.likes.length > 0 ? likedPost.data.data.data.likes.map(item => {
+        {likedPost.data.length > 0 ? likedPost.data.map(item => {
             return <div key={item._id} className="likeitems">
                 {user.user.user.firstName === item.firstName ? <h1> You </h1> : <h1> {item.firstName} {item.lastName} </h1> }
             </div>

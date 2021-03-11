@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useRouteMatch, Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {Button} from '@material-ui/core'
@@ -12,9 +12,7 @@ import {getAllMyPost, getAllData} from '../../redux/actions/actions'
 import './myPost-styles.css'
 
 const MyPostsPage = () => {
-
-    const history = useHistory()
-
+    
     const dispatch = useDispatch()
 
     const user = useSelector(state => state.user)
@@ -47,15 +45,18 @@ const MyPostsPage = () => {
         await axios.delete(`https://social-lorem-api.herokuapp.com/deleteonepost/${postID}`)
     }
 
+    let {url} = useRouteMatch()
+
     return <div className="mypostbox">
 
         {myPostsData.data.data.posts.length > 0 ? myPostsData.data.data.posts.map(post => {
             return <div key={post._id} className="mypostitem">
 
                 <div className="mypost1">
-                    <Button variant="contained" color="primary" style={{margin: '0rem 0.5rem'}} onClick={() => {
-                        history.push(`/likedby/${post._id}`)
-                    }}> Liked By </Button>
+                    {/* <Button variant="contained" color="primary" style={{margin: '0rem 0.5rem'}} onClick={() => {
+                        history.push(`/${url}/${post._id}`)
+                    }}> Liked By </Button> */}
+                    <Link to={`${url}/${post._id}`} style={{marginRight: '1rem'}}> Liked By </Link>
                     <Button variant="contained" color="primary" onClick={() => {
                         deletePost(post._id)
                     }}>
