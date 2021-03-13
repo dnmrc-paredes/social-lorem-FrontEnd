@@ -22,6 +22,7 @@ import AboutPage from './pages/about/about'
 const App = () => {
 
   const user = useSelector(state => state.user)
+  const isLoggedIn = useSelector(state => state.isLoggedIn)
 
   return (
     <div className="App">

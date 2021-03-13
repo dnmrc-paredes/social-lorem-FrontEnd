@@ -40,6 +40,42 @@
     align-items: center;
 }
 
+.commentbtn {
+    margin: 0.5rem 0rem 0rem 2rem;
+}
+
+.postinteractions {
+    display: flex;
+    padding: 3rem 1.5rem 1rem 1.5rem;
+}
+
+.postinteractions .like {
+    display: flex;
+}
+
+.postinteractions .like p {
+    margin: auto;
+    margin-left: 0.3rem;
+}
+
+.postinteractions .comment {
+    display: flex;
+    margin-left: 1rem;
+}
+
+.postinteractions .comment p {
+    margin: auto;
+    margin-left: 0.3rem;
+}
+
+.addcommentform {
+    display: flex;
+    padding: 0rem 1.5rem;
+}
+
+
+
+/* Media Q's */
 
 @media screen and (max-width: 1200px) {
     .post {
