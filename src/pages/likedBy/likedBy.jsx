@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
@@ -12,6 +12,9 @@ import './likedBy-styles.css'
 const LikedByPage = () => {
 
     const dispatch = useDispatch()
+    const [likers, setLikers] = useState({
+        data: []
+    })
     const likedPost = useSelector(state => state.likedBy)
     const user = useSelector(state => state.user)
 
@@ -20,18 +23,25 @@ const LikedByPage = () => {
     useEffect(() => {
         const getLikedBy = async () => {
             const info = await axios.get(`https://social-lorem-api.herokuapp.com/likedby/${postID}`)
-            dispatch(getLikes(info.data.data.likes))
+            setLikers(info.data.data.likes)
+            // dispatch(getLikes(info.data.data.likes))
         }
         getLikedBy()
     
     }, [dispatch, postID])
 
     return <div className="likebox">
-        {likedPost.data.length > 0 ? likedPost.data.map(item => {
+        {likers.length > 0 ? likers.map(item => {
             return <div key={item._id} className="likeitems">
                 {user.user.user.firstName === item.firstName ? <h1> You </h1> : <h1> {item.firstName} {item.lastName} </h1> }
             </div>
-        }) : <h1 style={{textAlign: 'center', paddingTop: '5rem'}}> No one liked your post.</h1> }
+        }) : likers.length === 0 ? <h1 style={{textAlign: 'center', paddingTop: '5rem'}}> No one liked your post.</h1> : <div className="loading">
+        <div className="loader"></div>
+     </div> }
+
+        {/* { likers.data === [] ? <h1> henlo </h1> : <h1> taet </h1> }
+        {console.log(likers)} */}
+
     </div>
 }
 

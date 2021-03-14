@@ -10,6 +10,10 @@
     margin: auto;
 }
 
+.signupform h1 {
+    padding-bottom: 1rem;
+}
+
 @media screen and (max-width: 750px) {
 
     .signupbox {
