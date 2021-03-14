@@ -12,12 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case 'LOGOUT_USER':
             return {
                 user: {}
-            }
-        case 'GET_CURRENT_USER':
-            return {
-                ...state,
-                user: action.payload
-            }    
+            }  
         default:
             return state        
     }

@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 
 // Redux
-import {getLikes} from '../../redux/actions/actions'
 
 // CSS
 import './likedBy-styles.css'
@@ -15,7 +14,7 @@ const LikedByPage = () => {
     const [likers, setLikers] = useState({
         data: []
     })
-    const likedPost = useSelector(state => state.likedBy)
+    
     const user = useSelector(state => state.user)
 
     const {postID} = useParams()

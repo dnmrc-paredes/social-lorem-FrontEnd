@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
+import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
 
 import {AppBar, Toolbar, Typography, Drawer, Divider, List} from '@material-ui/core'
@@ -14,7 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 // http://localhost:8000/getcurrentuser
 
 // Redux
-import {logoutUser} from '../../redux/actions/actions'
+import {logoutUser, getUsername} from '../../redux/actions/actions'
 
 // CSS
 import './header-styles.css'
@@ -85,20 +86,27 @@ const Header = () => {
     const history = useHistory()
 
     const user = useSelector(state => state.user)
+    const name = useSelector(state => state.name)
+    // const userID = user.user.user._id
+
+    // console.log(name.name.data.firstName)
 
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false)
 
-    // useEffect(() => {
-    //   const currentUser = async () => {
-    //     const info = await axios.get(`http://localhost:8000/getcurrentuser`, {userId: user.user.user._id})
-    //     console.log(info)
-    //     dispatch(getUser(info.data))
-    //   }
-
-    //   currentUser()
-    // })
+    useEffect(() => {
+      if (!Object.keys(user.user).length === 0) {
+        const currentUser = async () => {
+          const info = await axios.get(`http://localhost:8000/getcurrentuser/${user.user.user._id}`)
+          dispatch(getUsername(info.data))
+        }
+        currentUser()
+      }
+      
+      return
+      
+  }, [name, dispatch, user.user])
 
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -152,7 +160,7 @@ const Header = () => {
           </IconButton>
         </div>
         <List>
-          <ListItem> <h2> {user.user.user ? user.user.user.firstName : ""} {user.user.user ? user.user.user.lastName : ""} </h2> </ListItem>
+          <ListItem> <h2 style={{cursor: 'pointer'}} onClick={() => history.push(`/myprofile`)}> {user.user.user ? name.name.data.firstName : 'User' } {user.user.user ? name.name.data.lastName : ""} </h2> </ListItem>
         </List>
         <Divider />
         <List>

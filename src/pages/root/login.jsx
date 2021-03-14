@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {useHistory} from 'react-router-dom'
-import { GoogleLogin } from 'react-google-login';
 
 import {TextField, Button, Collapse} from '@material-ui/core'
 import { Alert } from '@material-ui/lab';

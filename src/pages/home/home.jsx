@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import ShowMoreText from 'react-show-more-text'
 
 import axios from 'axios'
@@ -9,13 +8,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import SendIcon from '@material-ui/icons/Send';
-import {TextField, Button} from '@material-ui/core'
+import {TextField} from '@material-ui/core'
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Redux
-import {getAllData, getAllMyPost} from '../../redux/actions/actions'
+import {getAllData, getAllMyPost, getUsername} from '../../redux/actions/actions'
 
 // Comments 
 import CommentPopUp from '../../components/comment-popup/comment-popup'
@@ -26,22 +25,19 @@ import './home-styles.css'
 const HomePage = () => {
 
     const dispatch = useDispatch()
-    const history = useHistory()
     const user = useSelector(state => state.user)
+    const name = useSelector(state => state.name)
     const datas = useSelector(state => state.datas)
     const myPostsData = useSelector(state => state.myPost)
     const [comments, setComments] = useState({
         data: []
     })
+
     const userID = user.user.user._id
 
     const token = user.user.token
 
     const comment = useRef()
-
-    // const [comment, setComment] = useState({
-    //     content: ""
-    // })
 
     axios.interceptors.request.use(
         config => {
@@ -52,6 +48,14 @@ const HomePage = () => {
             return Promise.reject(error)
         }
     )
+
+    useEffect(() => {
+        const currentUser = async () => {
+          const info = await axios.get(`http://localhost:8000/getcurrentuser/${userID}`)
+          dispatch(getUsername(info.data))
+        }
+        currentUser()
+    }, [name, dispatch, userID])
 
     useEffect(() => {
         
@@ -73,6 +77,7 @@ const HomePage = () => {
         getMyPosts()
     // eslint-disable-next-line
     },[myPostsData])
+
 
     const getCommentsOnPost = async (postid) => {
         const info = await axios.get(`http://localhost:8000/getcommentsonpost/${postid}`)
@@ -153,7 +158,7 @@ const HomePage = () => {
                                     aria-haspopup="true"
                                     onMouseEnter={handlePopoverOpen}
                                     onMouseLeave={handlePopoverClose}
-                                    style={{margin: 'auto'}}> {data.likes.length} Likes </Typography>
+                                    style={{margin: 'auto'}}> {data.likes.length} </Typography>
                                     
                                     <Popover
                                     id="mouse-over-popover"
@@ -184,7 +189,7 @@ const HomePage = () => {
                                     getCommentsOnPost(data._id)
                                     setOpenComments(true)
                                 }}  />
-                                <p> {data.comments.length} Comments </p>
+                                <p> {data.comments.length} </p>
 
                                 <CommentPopUp trigger={openComments} closecomments={closecomments} comments={comments} />
 
