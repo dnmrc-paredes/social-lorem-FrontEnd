@@ -23,19 +23,6 @@
     flex: 1;
 }
 
-@media screen and (max-width: 850px) {
-    .profilepostitem {
-        margin: 1rem 2rem;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .profilepostitem {
-        margin: 1rem;
-    }
-}
-
-
 .editbox {
     display: flex;
     flex-direction: column;
@@ -44,6 +31,7 @@
 }
 
 .editform {
+    padding-top: 1rem;
     display: flex;
     margin: auto;
     justify-content: center;
@@ -66,14 +54,32 @@
     width: 50%;
 }
 
+@media screen and (max-width: 850px) {
+    .profilepostitem {
+        margin: 1rem 2rem;
+    }
+}
+
 @media screen and (max-width: 750px) {
     .profilepostfunction {
         width: 80%;
     }
 }
 
+@media screen and (max-width: 600px) {
+    .editform {
+        width: 90%;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .profilepostfunction {
         width: 95%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .profilepostitem {
+        margin: 1rem;
     }
 }

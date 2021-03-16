@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Redux
-import {getAllData, getUsername} from '../../redux/actions/actions'
+import {getAllData, getUsername, getAllMyPost} from '../../redux/actions/actions'
 // import {getAllData, getAllMyPost, getUsername} from '../../redux/actions/actions'
 
 // Comments 
@@ -65,6 +65,11 @@ const HomePage = () => {
         dispatch(getUsername(info.data))
     }, [dispatch, userID])
 
+    const getMyPosts = useCallback( async () => {
+        const info = await axios.get(`https://social-lorem-api.herokuapp.com/myposts/${userID}`)
+        dispatch(getAllMyPost(info.data))
+    }, [dispatch, userID])
+
     // const currentUser = async () => {
     //     const info = await axios.get(`http://localhost:8000/getcurrentuser/${userID}`)
     //     dispatch(getUsername(info.data))
@@ -76,9 +81,13 @@ const HomePage = () => {
     // }
 
     useEffect(() => {
+        const get = setInterval(() => {
+            currentUser()
+        }, 1000)
+    return () => clearInterval(get)
+    },[currentUser])
 
-        getAllPost()
-        
+    useEffect(() => {
         const get = setInterval(() => {
             getAllPost()
         }, 1000)
@@ -87,13 +96,13 @@ const HomePage = () => {
 
     useEffect(() => {
 
-        currentUser()
+        getMyPosts()
 
         const get = setInterval(() => {
-            currentUser()
+            getMyPosts()
         }, 1000)
-        return () => clearInterval(get)
-    },[currentUser])
+    return () => clearInterval(get)
+    },[getMyPosts])
 
     // useEffect(() => {
     //     getMyPosts()

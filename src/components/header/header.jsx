@@ -13,7 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 // Redux
-import {logoutUser, clearName} from '../../redux/actions/actions'
+import {logoutUser, clearName, logoutTheUser} from '../../redux/actions/actions'
 
 // CSS
 import './header-styles.css'
@@ -84,7 +84,7 @@ const Header = () => {
     const history = useHistory()
 
     const user = useSelector(state => state.user)
-    const name = useSelector(state => state.name)
+    // const name = useSelector(state => state.name)
 
     const classes = useStyles();
     const theme = useTheme();
@@ -137,6 +137,7 @@ const Header = () => {
     };
     
     const handleLogout = () => {
+      dispatch(logoutTheUser())
       dispatch(clearName())
       dispatch(logoutUser())
       history.push("/")
@@ -174,7 +175,7 @@ const Header = () => {
           </IconButton>
         </div>
         <List>
-          <ListItem> <h2 style={{cursor: 'pointer'}} onClick={() => history.push(`/myprofile`)}> {Object.keys(name.name).length === 0 ? "" : `${name.name.data.firstName} ${name.name.data.lastName}` } </h2> </ListItem>
+          <ListItem> <h2 style={{cursor: 'pointer'}} onClick={() => history.push(`/myprofile`)}> My Profile </h2> </ListItem>
         </List>
         <Divider />
         <List>

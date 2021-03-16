@@ -32,8 +32,8 @@ const ProfilePage = () => {
     // let {url} = useRouteMatch()
 
     const [update, setUpdate] = useState({
-        firstName: name.name.data.firstName ?? "Temporary",
-        lastName: name.name.data.lastName ?? "Username"
+        firstName: name.name.data.firstName || "Temporary",
+        lastName: name.name.data.lastName || "Username"
     })
 
     const [editError, setEditError] = useState({

@@ -32,10 +32,10 @@ const App = () => {
             <Route path="/signup" render={() => user.user.user ? <Redirect to="/home" /> : <SignUpPage/> } />
             <Route path="/home" render={() => user.user.user ? <HomePage/> : <Redirect to="/" /> } />
             <Route path="/createpost" render={() => user.user.user ? <CreatePostPage/> : <Redirect to="/" /> } />
-            <Route exact path="/myposts" render={() => user.user.user ? <MyPostsPage/> : <Redirect to="/" /> } />
-            <Route exact path="/myposts/:postID" render={() => user.user.user ? <LikedByPage/> : <Redirect to="/" /> } />
             <Route path="/myprofile" render={() => user.user.user ? <ProfilePage/> : <Redirect to="/" /> } />
             <Route path="/about" render={() => user.user.user ? <AboutPage/> : <Redirect to="/" /> } />
+            <Route exact path="/myposts" render={() => user.user.user ? <MyPostsPage/> : <Redirect to="/" /> } />
+            <Route exact path="/myposts/:postID" render={() => user.user.user ? <LikedByPage/> : <Redirect to="/" /> } />
           </Switch>
         <Footer/>  
       </BrowserRouter>

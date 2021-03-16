@@ -75,3 +75,9 @@ export const clearName = () => {
         type: 'CLEAR_USERNAME'
     }
 }
+
+export const logoutTheUser = () => {
+    return {
+        type: 'LOGOUT_THE_USER'
+    }
+}
