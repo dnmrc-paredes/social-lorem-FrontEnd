@@ -69,3 +69,9 @@ export const getUsername = (data) => {
         payload: data
     }
 }
+
+export const clearName = () => {
+    return {
+        type: 'CLEAR_USERNAME'
+    }
+}

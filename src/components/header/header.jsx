@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import axios from 'axios'
-import {Link, useHistory} from 'react-router-dom'
+
+import {useHistory} from 'react-router-dom'
 
 import {AppBar, Toolbar, Typography, Drawer, Divider, List} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
@@ -12,10 +12,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-// http://localhost:8000/getcurrentuser
-
 // Redux
-import {logoutUser, getUsername} from '../../redux/actions/actions'
+import {logoutUser, clearName} from '../../redux/actions/actions'
 
 // CSS
 import './header-styles.css'
@@ -87,26 +85,48 @@ const Header = () => {
 
     const user = useSelector(state => state.user)
     const name = useSelector(state => state.name)
-    // const userID = user.user.user._id
-
-    // console.log(name.name.data.firstName)
 
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false)
 
-    useEffect(() => {
-      if (!Object.keys(user.user).length === 0) {
-        const currentUser = async () => {
-          const info = await axios.get(`http://localhost:8000/getcurrentuser/${user.user.user._id}`)
-          dispatch(getUsername(info.data))
-        }
-        currentUser()
-      }
+  //   const currentUser = useCallback( async () => {
+  //     const userID = user.user.user._id
+  //     const info = await axios.get(`http://localhost:8000/getcurrentuser/${userID}`)
+  //     dispatch(getUsername(info.data))
+  // }, [dispatch, user.user.user._id])
+
+  //     useEffect(() => {
+
+  //       if (Object.keys(user.user).length === 0) {
+  //         return console.log(`Wala`)
+  //       } else {
+  //         return console.log(`Meron`)
+  //       }
+
+  //   },[currentUser, user.user])
+
+  //   useEffect(() => {
+  //     if (!Object.keys(name.name).length === 0) {
+  //       const currentUser = async () => {
+  //           const info = await axios.get(`http://localhost:8000/getcurrentuser/${user.user.user._id}`)
+  //           dispatch(getUsername(info.data))
+  //       }
+  //       currentUser()
+  //     }
+
+  //     return ""
       
-      return
+  // }, [name, dispatch, user.user])
+
+  //   useEffect(() => {
+  //     if (!Object.keys(name.name).length === 0) {
+  //       return console.log(`true`)
+  //     }
+
+  //     return console.log(`false`)
       
-  }, [name, dispatch, user.user])
+  // }, [])
 
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -117,8 +137,9 @@ const Header = () => {
     };
     
     const handleLogout = () => {
-        dispatch(logoutUser())
-        history.push("/")
+      dispatch(clearName())
+      dispatch(logoutUser())
+      history.push("/")
     }
 
     const gohome = () => {
@@ -127,23 +148,16 @@ const Header = () => {
 
     return (
         <div>
-            <AppBar variant="outlined" position="sticky" className="hello">
+            
+            {Object.keys(user.user).length === 0 ? <div></div> : <AppBar variant="outlined" position="sticky" className="hello">
                 <Toolbar>
                     {user.user.user ? <IconButton edge="start" onClick={handleDrawerOpen} >
                       <MenuIcon style={{color: "white"}}/>
                     </IconButton> : ""}
                     <Typography variant="h6" style={{flexGrow: "1", cursor: "pointer"}} onClick={gohome} > Social-Lorem </Typography>
 
-                    {user.user.user ? <div className="loginregister">
-                        <Link to="/home"> Home </Link>
-                        <Link to="/about"> About </Link>
-                        <Link to="#" onClick={handleLogout} > Logout </Link>
-                    </div> : <div className="loginregister">
-                        <Link to="/"> Login </Link>
-                        <Link to="/signup"> Sign Up </Link>
-                    </div>}
                 </Toolbar>
-            </AppBar>
+            </AppBar> }
             
             <Drawer
         className={classes.drawer}
@@ -160,7 +174,7 @@ const Header = () => {
           </IconButton>
         </div>
         <List>
-          <ListItem> <h2 style={{cursor: 'pointer'}} onClick={() => history.push(`/myprofile`)}> {user.user.user ? name.name.data.firstName : 'User' } {user.user.user ? name.name.data.lastName : ""} </h2> </ListItem>
+          <ListItem> <h2 style={{cursor: 'pointer'}} onClick={() => history.push(`/myprofile`)}> {Object.keys(name.name).length === 0 ? "" : `${name.name.data.firstName} ${name.name.data.lastName}` } </h2> </ListItem>
         </List>
         <Divider />
         <List>
@@ -175,11 +189,6 @@ const Header = () => {
                 }} /> 
             </ListItem>
             <ListItem button >
-                <ListItemText primary="My Posts" onClick={() => {
-                  history.push("/myposts")
-                }} /> 
-            </ListItem>
-            <ListItem button >
                 <ListItemText primary="About" className="mediaqlinks" onClick={() => {
                   history.push("/about")
                 }} /> 
@@ -190,7 +199,7 @@ const Header = () => {
                 handleLogout()
             }}>
                 <ListItemText className="mediaqlinks" primary="Logout"/> 
-            </ListItem>
+            </ListItem>      
         </List>
       </Drawer>
 

@@ -9,14 +9,12 @@ import {persistor, store} from './redux/store/store'
 import App from './App';
 
 ReactDOM.render(
-  // <React.StrictMode>
   <>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
-  </>,  
-  // </React.StrictMode>,
+  </>,
   document.getElementById('root')
 );

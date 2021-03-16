@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState, useCallback} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import ShowMoreText from 'react-show-more-text'
 
@@ -14,7 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Redux
-import {getAllData, getAllMyPost, getUsername} from '../../redux/actions/actions'
+import {getAllData, getUsername} from '../../redux/actions/actions'
+// import {getAllData, getAllMyPost, getUsername} from '../../redux/actions/actions'
 
 // Comments 
 import CommentPopUp from '../../components/comment-popup/comment-popup'
@@ -26,9 +27,9 @@ const HomePage = () => {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
-    const name = useSelector(state => state.name)
+    // const name = useSelector(state => state.name)
     const datas = useSelector(state => state.datas)
-    const myPostsData = useSelector(state => state.myPost)
+    // const myPostsData = useSelector(state => state.myPost)
     const [comments, setComments] = useState({
         data: []
     })
@@ -49,38 +50,68 @@ const HomePage = () => {
         }
     )
 
-    useEffect(() => {
-        const currentUser = async () => {
-          const info = await axios.get(`http://localhost:8000/getcurrentuser/${userID}`)
-          dispatch(getUsername(info.data))
-        }
-        currentUser()
-    }, [name, dispatch, userID])
+    // const getAllPost = () => {
+    //     const info = await axios.get('https://social-lorem-api.herokuapp.com/getallpost')
+    //     dispatch(getAllData(info.data.data))
+    // }
+
+    const getAllPost = useCallback( async () => {
+        const info = await axios.get('https://social-lorem-api.herokuapp.com/getallpost')
+        dispatch(getAllData(info.data.data))
+    }, [dispatch])
+
+    const currentUser = useCallback( async () => {
+        const info = await axios.get(`https://social-lorem-api.herokuapp.com/getcurrentuser/${userID}`)
+        dispatch(getUsername(info.data))
+    }, [dispatch, userID])
+
+    // const currentUser = async () => {
+    //     const info = await axios.get(`http://localhost:8000/getcurrentuser/${userID}`)
+    //     dispatch(getUsername(info.data))
+    // }
+
+    // const getMyPosts =  async () => {
+    //     const info = await axios.get(`https://social-lorem-api.herokuapp.com/myposts/${userID}`)
+    //     dispatch(getAllMyPost(info.data))
+    // }
 
     useEffect(() => {
-        
-        const getAllPost = async () => {
-            const info = await axios.get('https://social-lorem-api.herokuapp.com/getallpost')
-            dispatch(getAllData(info.data.data))
-        }
 
         getAllPost()
-
-    // eslint-disable-next-line
-    }, [datas])
+        
+        const get = setInterval(() => {
+            getAllPost()
+        }, 1000)
+    return () => clearInterval(get)
+    }, [getAllPost])
 
     useEffect(() => {
-        const getMyPosts =  async () => {
-            const info = await axios.get(`https://social-lorem-api.herokuapp.com/myposts/${userID}`)
-            dispatch(getAllMyPost(info.data))
-        }
-        getMyPosts()
-    // eslint-disable-next-line
-    },[myPostsData])
+
+        currentUser()
+
+        const get = setInterval(() => {
+            currentUser()
+        }, 1000)
+        return () => clearInterval(get)
+    },[currentUser])
+
+    // useEffect(() => {
+    //     getMyPosts()
+    
+    // }, [getMyPosts])
+
+    // useEffect(() => {
+    //     const getMyPosts =  async () => {
+    //         const info = await axios.get(`https://social-lorem-api.herokuapp.com/myposts/${userID}`)
+    //         dispatch(getAllMyPost(info.data))
+    //     }
+    //     getMyPosts()
+    // // eslint-disable-next-line
+    // },[myPostsData])
 
 
     const getCommentsOnPost = async (postid) => {
-        const info = await axios.get(`http://localhost:8000/getcommentsonpost/${postid}`)
+        const info = await axios.get(`https://social-lorem-api.herokuapp.com/getcommentsonpost/${postid}`)
         setComments(info.data)
     }
 
@@ -203,8 +234,8 @@ const HomePage = () => {
                                     if (comment.current === null || comment.current === "" || comment.current === undefined) {
                                         return
                                     }
-                                    axios.post(`http://localhost:8000/commentonpost/${data._id}`, {userID: user.user.user._id, userComment: comment.current})
-                                    return window.location.reload()
+                                    axios.post(`https://social-lorem-api.herokuapp.com/commentonpost/${data._id}`, {userID: user.user.user._id, userComment: comment.current})
+                                    window.location.reload()
                                 } catch (err) {
                                     console.log(err.response.data)
                                 }

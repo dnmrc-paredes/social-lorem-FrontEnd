@@ -16,7 +16,7 @@ import HomePage from './pages/home/home'
 import CreatePostPage from './pages/createPost/createPost'
 import MyPostsPage from './pages/myPosts/myPosts'
 import LikedByPage from './pages/likedBy/likedBy'
-import EditProfilePage from './pages/editProfile/editProfile'
+import ProfilePage from './pages/profile/profile'
 import AboutPage from './pages/about/about'
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
             <Route path="/createpost" render={() => user.user.user ? <CreatePostPage/> : <Redirect to="/" /> } />
             <Route exact path="/myposts" render={() => user.user.user ? <MyPostsPage/> : <Redirect to="/" /> } />
             <Route exact path="/myposts/:postID" render={() => user.user.user ? <LikedByPage/> : <Redirect to="/" /> } />
-            <Route path="/myprofile" render={() => user.user.user ? <EditProfilePage/> : <Redirect to="/" /> } />
+            <Route path="/myprofile" render={() => user.user.user ? <ProfilePage/> : <Redirect to="/" /> } />
             <Route path="/about" render={() => user.user.user ? <AboutPage/> : <Redirect to="/" /> } />
           </Switch>
         <Footer/>  

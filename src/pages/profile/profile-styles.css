@@ -1,0 +1,79 @@
+.profilepostbox {
+    min-height: 85vh;
+}
+
+.profilepostitem {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 5rem 1rem;
+    margin: 1rem 6rem;
+    background-color: #eceff1;
+    border-radius: 5px;
+}
+
+.profilepost1 {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.profilepost2 {
+    padding-top: 1rem;
+    flex: 1;
+}
+
+@media screen and (max-width: 850px) {
+    .profilepostitem {
+        margin: 1rem 2rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .profilepostitem {
+        margin: 1rem;
+    }
+}
+
+
+.editbox {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+    padding-top: 5rem;
+}
+
+.editform {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+.nameandiconbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.profilepostfunction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+}
+
+@media screen and (max-width: 750px) {
+    .profilepostfunction {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .profilepostfunction {
+        width: 95%;
+    }
+}

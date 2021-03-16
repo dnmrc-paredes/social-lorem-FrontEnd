@@ -10,6 +10,7 @@ const CommentPopUp = ({trigger, closecomments, comments}) => {
 
     // user.user.user.firstName === item.firstName ? <h1> You </h1> : <h1> {item.firstName} {item.lastName} </h1> 
 
+
     return trigger ? <div className="allcommentsbox" >
         <div className="closecomments">
             <CancelIcon style={{margin: 'auto 0', color: 'white'}} onClick={closecomments} />

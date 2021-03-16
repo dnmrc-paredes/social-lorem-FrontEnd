@@ -9,11 +9,11 @@
     text-decoration: none;
 }
 
-.mediaqlinks {
+/* .mediaqlinks {
     display: none;
-}
+} */
 
-@media screen and (max-width: 750px) {
+/* @media screen and (max-width: 750px) {
     .loginregister {
         display: none;
     }
@@ -22,4 +22,4 @@
         display: initial;
     }
 
-}
+} */

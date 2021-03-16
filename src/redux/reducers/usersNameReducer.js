@@ -9,6 +9,10 @@ const usersNameReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 name: action.payload
             }
+        case 'CLEAR_USERNAME':
+            return {
+                name: {}
+            }    
         default:
             return state
     }
