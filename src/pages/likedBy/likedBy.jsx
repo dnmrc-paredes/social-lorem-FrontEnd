@@ -32,7 +32,7 @@ const LikedByPage = () => {
     return <div className="likebox">
         {likers.length > 0 ? likers.map(item => {
             return <div key={item._id} className="likeitems">
-                {user.user.user.firstName === item.firstName ? <h1> You </h1> : <h1> {item.firstName} {item.lastName} </h1> }
+                {user.user.user.firstName === item.firstName && user.user.user.lastName === item.lastName ? <h1> You </h1> : <h1> {item.firstName} {item.lastName} </h1> }
             </div>
         }) : likers.length === 0 ? <h1 style={{textAlign: 'center', paddingTop: '5rem'}}> No one liked your post.</h1> : <div className="loading">
         <div className="loader"></div>
